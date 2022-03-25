@@ -1,8 +1,8 @@
 import * as React from 'react'
 import {useState, useEffect} from 'react'
 import logo from './logo.svg';
-import Add from './Add';
-import Edit from './Edit';
+import Add from './AddPlanet';
+import Edit from './EditPlanet';
 import axios from 'axios'
 import {Route, Routes, Link} from 'react-router-dom'
 
@@ -20,16 +20,6 @@ const Planets:React.FC  = (props:any) => {
       .catch((err:any) => console.error(err))
     }
   
-    const getGears = () => {
-      axios
-      .get('https://space-meteor.herokuapp.com/gear')
-      .then(
-        (response:any) => setGears(response.data),
-        (err:any) => console.error(err)
-      )
-      .catch((err:any) => console.error(err))
-  }
-  
     const handleDelete = (planetData:any)=>{
           axios
           .delete(`https://space-meteor.herokuapp.com/planets/${planetData._id}`)
@@ -40,7 +30,7 @@ const Planets:React.FC  = (props:any) => {
                 setPlanets(response.data)
               })
             })
-          }
+         }
   
           const handleUpdate = (editPlanet:any) => {
             console.log(editPlanet)
@@ -58,10 +48,8 @@ const Planets:React.FC  = (props:any) => {
   
     return (
       <>
+      <Add />
       <h1>TRAVEL TO THE PLANETS!</h1>
-      {/* <Link to="/Gears">gears</Link>
-      <Link to="/Food">food</Link>
-       <Add /> */}
       <div className = 'planetContainer'>
       {planets?.map((planet:any)=>{ 
         return (

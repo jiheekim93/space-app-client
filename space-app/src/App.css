@@ -1,13 +1,25 @@
+* {
+  /* border: 1px blue solid; */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: black;
   color: white;
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
 
 img {
   width: 250px;
 }
 
-.planetContainer {
+.planetContainer, .gearContainer, .foodContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -15,6 +27,25 @@ img {
   gap: 3vw;
 }
 
-.planetCard {
+.planetCard, .gearCard, .foodCard {
   width: 250px;
+}
+
+.showcase {
+  display: flex;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+
+video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
