@@ -3,11 +3,14 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  /* border: 1px solid palegoldenrod */
 }
 
 body {
   background: black;
   color: white;
+  height: 100%;
+  margin: 0;
 }
 
 a {
@@ -18,6 +21,14 @@ a {
 img {
   width: 250px;
 }
+
+.ticketBackground {
+  display: flex;
+  width: 100%;
+  margin: 0;
+}
+
+
 
 .planetContainer, .gearContainer, .foodContainer {
   display: flex;
@@ -41,11 +52,100 @@ img {
   z-index: -1;
 }
 
-video {
+video, .rings {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.ticketForm {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 50vh;
+  gap: 40px;
+}
+
+.ticketForm form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+
+}
+
+.ticketForm input {
+  display: flex;
+  flex-wrap: wrap;
+  width: 300px;
+  height: 25px;
+}
+
+.ticketForm input[type=date] {
+  margin-right: 20px;
+}
+
+.ticketForm input[type=submit] {
+  width: 50px;
+  height: 25px;
+}
+
+.ticketForm input[type=text] {
+  margin-left: 70px;
+}
+
+.ticketForm select {
+  margin-left: 20px;
+  width: 300px;
+  height: 25px;
+}
+
+.showModal {
+  /* background: black; */
+  width: 400px;
+  padding: 50px;
+  border-radius: 5%;
+
+}
+
+.showPlanet {
+  transition-duration: 0.4s;
+}
+
+.showPlanet:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.Krypton {
+
+}
+
+.Iris-Cream {
+
+}
+
+.Sauna {
+
+}
+
+.Breakup {
+
+}
+
+.Flags {
+
+}
+
+.GOP {
+
+}
+
+.Z {
+
 }

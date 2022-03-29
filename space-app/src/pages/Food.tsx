@@ -40,11 +40,15 @@ const FoodPage: React.FC = (props:any) => {
               getFood()
             })
         }
+  
        
 
         useEffect(() => {
           getFood()
          }, [])
+
+    
+    
 
   return (
     <>
@@ -59,13 +63,20 @@ const FoodPage: React.FC = (props:any) => {
     <div className = 'planetContainer'>
     {food?.map((fod:any, index)=>{ 
       return (
+        <>
+        <div>
+          <Routes>
+            <Route path = '/food/:id' element = {<ShowFood fod = {fod} food = {food}/>}/>
+          </Routes>
+        </div>
       <div className = 'planetCard' key = {fod._id + index}>
-      <img onClick = {() => {navigate('/food/' + fod._id)}}src = {fod.image}></img>
+      <img onClick = {() => {navigate('/food/' + fod._id)} }src = {fod.image}></img>
       <h3>{fod.name}</h3>
       <h4>{fod.description}</h4>
       
       <button onClick = {(event) => {handleDelete(fod)}} >delete</button>
       </div>
+      </>
        )
     })
   }

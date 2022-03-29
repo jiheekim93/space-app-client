@@ -9,8 +9,9 @@ const Shop = () => {
     return (
         <>
         <nav>
-            <Link to = '/food'>Food</Link>
-            <Link to = '/gear'>Gear</Link>
+        <Link to = '/gear'><img src = '#'></img></Link>
+
+         <Link to = '/food'><img src = '#'></img></Link>
         </nav>
        
         </>

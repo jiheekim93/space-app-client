@@ -1,15 +1,14 @@
 import * as React from 'react'
 import {useState, useEffect} from 'react'
-import logo from './logo.svg';
 import Add from './AddPlanet';
 import Edit from './EditPlanet';
 import axios from 'axios'
 import {Route, Routes, Link} from 'react-router-dom'
+import ShowPlanets from "./ShowPlanets"
 
 const Planets:React.FC  = (props:any) => {
     const [planets, setPlanets] = useState<[]>([])
-    const [gears, setGears] = useState<[]>([])
-  
+
     const getPlanets = () => {
       axios
       .get('https://space-meteor.herokuapp.com/planets')
@@ -48,18 +47,22 @@ const Planets:React.FC  = (props:any) => {
   
     return (
       <>
-      <Add />
+      <div className='showcase'>
+    <video src="https://i.imgur.com/cUgXEi6.mp4" loop muted autoPlay={true}></video>
+    <img className = 'rings' src = 'https://i.imgur.com/DIV0fC4.png'></img>
+    </div>
       <h1>TRAVEL TO THE PLANETS!</h1>
       <div className = 'planetContainer'>
       {planets?.map((planet:any)=>{ 
         return (
-        <div className = 'planetCard' key = {planet._id}>
-        <img src ={planet.image}></img>
-        <h3>{planet.name}</h3>
-        <h3>{planet.description}</h3>
-        <h4>Year discovered: {planet.date_found}</h4>
-        <h4>Ticket price: ${planet.ticket_price}</h4>
-        <h4>Featured activity: {planet.activity}</h4>
+        <div className = {planet.name} key = {planet._id}>
+        <ShowPlanets
+        name = {planet.name}
+        image = {planet.image}
+        description = {planet.description}
+        ticket_price = {planet.ticket_price}
+        date_found = {planet.date_found}
+        activity = {planet.activity} weather = {planet.weather} distance = {planet.distance} day_length= {planet.day_length}/>
         <Edit handleUpdate={handleUpdate} id={planet._id}/>
         <button onClick = {(event) => {handleDelete(planet)}} >delete</button>
         </div>
