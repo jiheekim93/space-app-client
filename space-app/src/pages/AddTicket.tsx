@@ -6,7 +6,13 @@ import Cart from './Cart'
 
 const AddTickets = (props:any)=>{
     let emptyTicket = {ticket_price:'', date:'', destination:''}
-    const [ticket, setTicket] = useState<any['']>({emptyTicket})    
+    const [ticket, setTicket] = useState<any>({emptyTicket})
+    const [addToCart, setAddToCart] = useState<any['']>([])
+  
+    
+    const handleNewCart = (event:any)=>{
+      setAddToCart(event.target.value);
+      }
 
     
     const handleChange = (event:any) => {
@@ -17,12 +23,28 @@ const AddTickets = (props:any)=>{
         event.preventDefault()
         props.handleCreate(ticket)
       }
+      const handleCart = () => {
+      
+        axios.post(
+          'https://space-meteor.herokuapp.com/cart',
+          {
+            id: ticket._id,
+            destination: ticket.destination,
+            date: ticket.date,
+            price: ticket.price
+          }).then(() => {
+            axios.get('https://space-meteor.herokuapp.com/cart')
+            .then((response) => {
+              setAddToCart(response.data)
+            })
+          })
+      }
 
 
     return (
      <div className='ticketForm'>
    
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleCart} >
 
         <label htmlFor="date"></label>
         <input type="date" 
@@ -42,9 +64,9 @@ const AddTickets = (props:any)=>{
         <option value='Pop-star Z'>Pop-star Z</option>
         </select></label>
 
-        <label htmlFor="ticket_price"></label>
-        <input type="text" name="ticket_price"  placeholder='price'
-        value={ticket.ticket_price}
+        <label htmlFor="price"></label>
+        <input type="text" name="price"  placeholder='price'
+        value={ticket.price}
         onChange={handleChange}/>
 
 
@@ -52,7 +74,7 @@ const AddTickets = (props:any)=>{
         value={ticket.destination}
         onChange={handleChange}/> */}
 
-       <button> <input type="submit" /></button>
+       <button> <input type="submit" onChange={handleNewCart}/></button>
       </form>
  
     </div>

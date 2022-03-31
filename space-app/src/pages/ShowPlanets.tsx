@@ -2,7 +2,7 @@ import * as React from 'react';
 import { styled, Box } from '@mui/material';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import {useState} from 'react'
-
+import axios from 'axios'
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
   z-index: 1300;
@@ -36,9 +36,36 @@ const style = {
 
 const ShowPlanets = (props:any) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [planets, setPlanets] = useState<any['']>('')
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const getPlanets = () => {
+    axios
+      .get('https://space-meteor.herokuapp.com/planets/')
+      .then(
+        (response) => setPlanets(response.data),
+        (err) => console.error(err)
+      )
+      .catch((error) => console.error(error))
+  }
+
+
+   console.log(props.planet._id)
+
+     const handleDelete = (planetData:any)=>{
+      
+      axios
+      .delete(`https://space-meteor.herokuapp.com/planets/${planetData._id}`)
+        .then(()=>{
+          axios
+          .get('https://space-meteor.herokuapp.com/planets/')
+          .then((response:any)=>{
+            setPlanets(response.data)
+          })
+        })
+     }
+  
   return (
     <div>
       <img src = {props.image} className = 'showPlanet' onClick={handleOpen}>
@@ -52,7 +79,8 @@ const ShowPlanets = (props:any) => {
       >
         <Box sx = {style} className = 'showModal'>
         <img className = 'showImage'src = {props.image}></img>
-        <div>
+        <div key={props._id}>
+          {/* <h2>{props.id}</h2> */}
           <h2>{props.name}</h2>
           <h3>{props.description}</h3>
           <h3>Ticket Price: {props.ticket_price}</h3>
@@ -62,6 +90,7 @@ const ShowPlanets = (props:any) => {
           <h3>Distance from Sun: {props.distance} miles</h3>
           <h3>Day Length: {props.day_length} hours</h3>
          </div>
+         <button onClick = {(event) => {handleDelete(props.planet)}} >delete</button>
 
         </Box>
       </StyledModal>

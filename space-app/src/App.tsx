@@ -20,11 +20,11 @@ import Login from './pages/Login'
 // } from "@inrupt/solid-client-authn-browser";
 // import { useNavigate } from 'react-router-dom'
 
+
 const App: React.FC = (props:any) => {
   const [food, setFood] = useState<[]>([])
   const [gears, setGears] = useState<[]>([])
   const [planets, setPlanets] = useState<[]>([])
-
   //Login
   const [toggleLogin, setToggleLogin] = useState<boolean>(true)
   const [toggleError, setToggleError] = useState<boolean>(false)
@@ -35,6 +35,12 @@ const App: React.FC = (props:any) => {
   const [username, setUsername] = useState<''>('')
   const [password, setPassword] = useState<''>('')
   const [userObj, setUserObj] = useState()
+
+
+  // sessionStorage.setItem('usernamet', true)
+  
+
+  
   // const EventEmitter = require('events');
 
   // class MyEmitter extends EventEmitter {}
@@ -56,6 +62,35 @@ const App: React.FC = (props:any) => {
   //   console.log(currentUrl)
   // });
   
+  const getFood = () => {
+    axios
+    .get('https://space-meteor.herokuapp.com/food')
+    .then(
+      (response) => setFood(response.data),
+      (err) => console.error(err)
+    )
+    .catch((error) => console.error(error))
+}
+
+const getGears = () => {
+  axios
+  .get('https://space-meteor.herokuapp.com/gear')
+  .then(
+    (response) => setGears(response.data),
+    (err) => console.error(err)
+  )
+  .catch((error) => console.error(error))
+}
+
+const getPlanets = () => {
+axios
+.get('https://space-meteor.herokuapp.com/planets')
+.then(
+  (response) => setPlanets(response.data),
+  (err) => console.error(err)
+)
+.catch((error) => console.error(error))
+}
 
 
   const handleCreateUser = (event:any) => {
@@ -67,7 +102,7 @@ const App: React.FC = (props:any) => {
     }
     setUsername('')
     setPassword('')
-    axios.post('https://space-meteor.herokuapp.com/users/createaccount', userObj)
+    axios.post('https://space-meteor.herokuapp.com/users/', userObj)
       .then((response) => {
         if (response.data.username) {
           console.log(response.data);
@@ -81,32 +116,39 @@ const App: React.FC = (props:any) => {
         }
       })
   }
-  const handleLogin = (event:any) => {
+
+
+const handleLogin = (event:any) => {
     event.preventDefault()
-    axios.put('https://space-meteor.herokuapp.com/users/login',
-    {
+    event.currentTarget.reset()
+    let userObj = {
       username: username,
       password: password
-    })// if we log in successfully, all error messages will be blank and we will see a logout button render
-    .then((response) => {
-      if(response.data.username){
-        setToggleError(false)
-        setErrorMessage('')
-        setCurrentUser(response.data)
-        handleToggleLogout()
-      } else {
-        setToggleError(true)
-        setErrorMessage(response.data)
+    }
+    setUsername('')
+    setPassword('')
+    axios.post('https://space-meteor.herokuapp.com/sessions', userObj)
+      .then((response) => {
+        if (response.data.username) {
+          console.log(response.data)
+          setToggleError(false)
+          setErrorMessage('')
+          setCurrentUser(response.data)
+          handleToggleLogout()
+        } else {
+          console.log(response);
+          setToggleError(true)
+          setErrorMessage(response.data)
+        }
       }
-    }).then(() => {
-      axios.get(`https://space-meteor.herokuapp.com/users/findOne/${username}`,
-    ).then((res) => {
-      setUserObj(res.data)
-    
-      // console.log(res.data);
+    ).then(() => {
+      getPlanets()
+      getFood()
+      getGears()
     })
-    })
-  }
+  }  
+  
+  
   const handleToggleLogout = () => {
     if(toggleLogout) {
       setToggleLogout(false)
@@ -116,8 +158,6 @@ const App: React.FC = (props:any) => {
   }
 
   const handleLogout = () => {
-    setUsername('')
-    setPassword('')
     setCurrentUser({})
     handleToggleLogout()
   }
@@ -140,41 +180,12 @@ const App: React.FC = (props:any) => {
     }
 
 
-  const getFood = () => {
-      axios
-      .get('https://space-meteor.herokuapp.com/food')
-      .then(
-        (response) => setFood(response.data),
-        (err) => console.error(err)
-      )
-      .catch((error) => console.error(error))
-  }
-
-  const getGears = () => {
-    axios
-    .get('https://space-meteor.herokuapp.com/gear')
-    .then(
-      (response) => setGears(response.data),
-      (err) => console.error(err)
-    )
-    .catch((error) => console.error(error))
-}
-
-const getPlanets = () => {
-  axios
-  .get('https://space-meteor.herokuapp.com/planets')
-  .then(
-    (response) => setPlanets(response.data),
-    (err) => console.error(err)
-  )
-  .catch((error) => console.error(error))
-}
-
-
 useEffect(()=> {
+  const login = sessionStorage.getItem("");
   getPlanets()
   getGears()
   getFood()
+  setUsername('')
 }, [])
 
 
@@ -186,21 +197,30 @@ useEffect(()=> {
 //     console.log(`Logged in with WebID [${info?.webId}]`)
 //   })
 // }, []);
-
+// if (!currentUser) {
+//   return (
+//     <>
+//       <button
+//         onClick={() => {
+//           setCurrentUser(true);
+//         }}
+//       >
+//         I accept
+//       </button>
+//     </>
+//   );
+// }
   return(
       <>
 
        <nav>
         <Link to ='/'>Home</Link>
         <Link to ='/planets'>Planets</Link> 
-        <Link to ='/newplanet'>Add Planet</Link>
         <Link to ='/shop'>Shop</Link> 
         <Link to ='/tickets'>Tickets</Link> 
         <Link to ='/cart'>Cart</Link> 
-     
-      </nav>
-
-      <Login  setCurrentUser = {setCurrentUser}
+        <Link to ='/login'>Account</Link> 
+        {/* <Login  setCurrentUser = {setCurrentUser}
                 currentUser = {currentUser}
                 handleCreateUser = {handleCreateUser}
                 handleLogin = {handleLogin}
@@ -220,19 +240,44 @@ useEffect(()=> {
                 setPlanets = {setPlanets}
                 setFood = {setFood}
                 setGears = {setGears}
-                />
+                AddPlanet = {AddPlanet}
+                /> */}
+
+      </nav>
+
 
       <Routes>
-      <Route path = '/' element = {<Home />}/>
+      <Route path = '/' element = {<Home/>}/>
       <Route path = '/planets' element = {<Planets />}/>
       <Route path = '/tickets' element = {<Tickets />}/>      
       <Route path = '/shop' element = {<Shop />}/>
       <Route path = '/food/*' element = {<Food />}/>
       <Route path = '/gear/*' element = {<Gears />}/>
       <Route path = '/cart/*' element = {<Cart />}/>
-      <Route path = '/newplanet' element = {<AddPlanet />}/>
       <Route path = '/food/:id' element = {<ShowFood food = {food}/>}/>
       <Route path = '/gear/:id' element = {<ShowGears gears = {gears}/>}/>
+      <Route path = '/login/' element = {<Login setCurrentUser = {setCurrentUser}
+                                                currentUser = {currentUser}
+                                                handleCreateUser = {handleCreateUser}
+                                                handleLogin = {handleLogin}
+                                                handleLogout = {handleLogout}
+                                                handleToggleForm = {handleToggleForm}
+                                                handleToggleLogout = {handleToggleLogout}
+                                                toggleLogin = {toggleLogin}
+                                                toggleLogout = {toggleLogout}
+                                                username = {username}
+                                                setUsername = {setUsername}
+                                                password = {password}
+                                                setPassword = {setPassword}
+                                                errorMessage = {errorMessage}
+                                                setErrorMessage = {setErrorMessage}
+                                                toggleError = {toggleError}
+                                                setToggleError = {setToggleError}
+                                                setPlanets = {setPlanets}
+                                                setFood = {setFood}
+                                                setGears = {setGears}
+                                                AddPlanet = {AddPlanet}
+                                                />}/>
       </Routes>
       
       

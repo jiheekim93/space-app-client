@@ -7,11 +7,17 @@ import {Link, Routes, Route, useNavigate,} from "react-router-dom";
 
 
 const Tickets = () => {
-    const [tickets, setTickets] = useState<[]>([])
+    const [tickets, setTickets] = useState<any>([])
+    const [addToCart, setAddToCart] = useState<any['']>([])
+
+
+    const handleNewCart = (event:any)=>{
+        setAddToCart(event.target.value);
+        }
 
     const getTickets = () => {
         axios
-        .get('https://space-meteor.herokuapp.com/tickets')
+        .get('https://space-meteor.herokuapp.com/tickets/')
         .then(
           (response) => setTickets(response.data),
           (err) => console.error(err)
@@ -39,6 +45,24 @@ const Tickets = () => {
             })
           })
        }
+         
+    
+       const handleCart = () => {
+      
+        axios.post(
+          'https://space-meteor.herokuapp.com/cart',
+          {
+            id: tickets._id,
+            destination: tickets.destination,
+            date: tickets.date,
+            price: tickets.price
+          }).then(() => {
+            axios.get('https://space-meteor.herokuapp.com/cart')
+            .then((response) => {
+              setAddToCart(response.data)
+            })
+          })
+      }
 
 
     useEffect(() => {
@@ -55,11 +79,14 @@ const Tickets = () => {
         <div className='ticket'>
         {tickets?.map((ticket:any) =>{
             return (
-                <div className='tickets' key={ticket.id}>
-                    <p>{ticket.ticket_price}</p>
+                <div className='tickets' key={ticket._id}>
+                    <p>{ticket.price}</p>
                     <p>{ticket.date}</p>
                     <p>{ticket.destination}</p>
                     <button onClick = {(event) => {handleDelete(ticket)}}>delete</button>
+                    <form className = 'addForm' onSubmit={handleCart}>
+                <input className = 'addToCart' type = 'submit' onChange={handleNewCart}/>
+        </form>
                 </div>
             )}
              )}
