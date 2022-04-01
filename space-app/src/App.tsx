@@ -36,7 +36,7 @@ const App: React.FC = (props:any) => {
   const [password, setPassword] = useState<''>('')
   const [userObj, setUserObj] = useState()
 
-
+  // const[cover, setCover] = useState<boolean>(false)
   // sessionStorage.setItem('usernamet', true)
   
 
@@ -197,12 +197,12 @@ useEffect(()=> {
 //     console.log(`Logged in with WebID [${info?.webId}]`)
 //   })
 // }, []);
-// if (!currentUser) {
+// if (!cover) {
 //   return (
 //     <>
 //       <button
 //         onClick={() => {
-//           setCurrentUser(true);
+//           setCover(true);
 //         }}
 //       >
 //         I accept
@@ -212,43 +212,20 @@ useEffect(()=> {
 // }
   return(
       <>
-
+{/* 
        <nav>
-        <Link to ='/'>Home</Link>
+        <Link to ='/home'>Home</Link>
         <Link to ='/planets'>Planets</Link> 
         <Link to ='/shop'>Shop</Link> 
         <Link to ='/tickets'>Tickets</Link> 
         <Link to ='/cart'>Cart</Link> 
         <Link to ='/login'>Account</Link> 
-        {/* <Login  setCurrentUser = {setCurrentUser}
-                currentUser = {currentUser}
-                handleCreateUser = {handleCreateUser}
-                handleLogin = {handleLogin}
-                handleLogout = {handleLogout}
-                handleToggleForm = {handleToggleForm}
-                handleToggleLogout = {handleToggleLogout}
-                toggleLogin = {toggleLogin}
-                toggleLogout = {toggleLogout}
-                username = {username}
-                setUsername = {setUsername}
-                password = {password}
-                setPassword = {setPassword}
-                errorMessage = {errorMessage}
-                setErrorMessage = {setErrorMessage}
-                toggleError = {toggleError}
-                setToggleError = {setToggleError}
-                setPlanets = {setPlanets}
-                setFood = {setFood}
-                setGears = {setGears}
-                AddPlanet = {AddPlanet}
-                /> */}
-
-      </nav>
+      </nav> */}
 
 
       <Routes>
-      <Route path = '/' element = {<Home/>}/>
-      <Route path = '/planets' element = {<Planets />}/>
+      <Route path = '/home' element = {<Home/>}/>
+      <Route path = '/planets' element = {<Planets {...currentUser}  {...setCurrentUser}/>}/>
       <Route path = '/tickets' element = {<Tickets />}/>      
       <Route path = '/shop' element = {<Shop />}/>
       <Route path = '/food/*' element = {<Food />}/>

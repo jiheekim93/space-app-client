@@ -5,6 +5,7 @@ import '../App.css';
 // import ShowFood from './ShowFood'
 import {Link, Routes, Route, useNavigate,} from "react-router-dom";
 import ShowFood from './ShowFood'
+import Nav from './Nav'
 
 const FoodPage: React.FC = (props:any) => {
     const [food, setFood] = useState<[]>([])
@@ -52,15 +53,15 @@ const FoodPage: React.FC = (props:any) => {
 
   return (
     <>
-    
-       <nav>
-            <Link to = '/food'>Food</Link>
-            <Link to = '/gear'>Gear</Link>
+    <Nav />
+       <nav className = 'shopNavBar'>
+            <Link to = '/food'>FOOD</Link>
+            <Link to = '/gear'>GEAR</Link>
         </nav>
 
-    <h1>YUMMY SPACE FOOD</h1>
+    <h1 className= 'shopHeader'>BROWSE SPACE FOOD</h1>
      
-    <div className = 'planetContainer'>
+    <div className = 'foodContainer'>
     {food?.map((fod:any, index)=>{ 
       return (
         <>
@@ -71,10 +72,10 @@ const FoodPage: React.FC = (props:any) => {
         </div>
       <div className = 'planetCard' key = {fod._id + index}>
       <img onClick = {() => {navigate('/food/' + fod._id)} }src = {fod.image}></img>
-      <h3>{fod.name}</h3>
-      <h4>{fod.description}</h4>
+      <h3 className = 'foodName'>{fod.name}</h3>
+      <h4 className = 'foodPrice'>${fod.price}</h4>
       
-      <button onClick = {(event) => {handleDelete(fod)}} >delete</button>
+      {/* <button onClick = {(event) => {handleDelete(fod)}} >delete</button> */}
       </div>
       </>
        )

@@ -7,6 +7,7 @@ const Edit = (props:any) => {
 let emptyPlanet = { id:props.id, name:'', image:'', description:'', price: '', activity:'', date_found:''}
 
 const [planet, setPlanet] = useState(emptyPlanet)
+const [editBtn, setEditBtn] = useState<any['']>('')
 
 // const [newName, setNewName] = useState<string>('')
 // const [newImage, setNewImage] = useState<string>('')
@@ -74,8 +75,10 @@ return (
     <>
 
     <>
-      <details>
-        <summary>Edit Planet</summary>
+    <button className = "btn" onClick={() => setEditBtn(!editBtn)}>
+            {!editBtn ? "Edit planet" : "Cancel"}
+            </button>
+            {editBtn && (
         <form onSubmit={handleSubmit}>
           <label htmlFor="name"></label>
           <input
@@ -127,7 +130,7 @@ return (
           />
           <input type="submit" />
         </form>
-      </details>
+   )}
     </>
             {/* <h2>Edit Item</h2>
                 <form className = 'addForm' onSubmit={(e) => {e.preventDefault();handleEdit(props.planets)}}>
@@ -139,6 +142,7 @@ return (
                 <input className = 'addInput' type = 'text' placeholder = 'Activity...' onChange={handleNewActivity}/><br/>
                 <input className = 'submitButton' type = 'submit' value = 'Edit Item' />
                 </form>  */}
+              
             </>
 )
 

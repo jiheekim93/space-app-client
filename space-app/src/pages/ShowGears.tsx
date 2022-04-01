@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Route, Routes, Link} from 'react-router-dom'
 import { useParams } from 'react-router-dom'
+import Nav from './/Nav'
 
 const ShowGears = (props:any, gear:any) => {
     const params = useParams()
@@ -50,14 +51,23 @@ console.log(gears);
 
     return (
         <>
-        <h3>shop!</h3>
+        <Nav />
+        <nav className="shopNavBar">
+            <Link to = '/food'>FOOD</Link>
+            <Link to = '/gear'>GEAR</Link>
+        </nav>
+        <div className = 'showStuffDiv'>
+        <div className = 'showStuff'>
         <img src = {gears.image}></img>
         <h1>{gears.name}</h1>
         <h2>{gears.description}</h2>
         <h3>{gears.price}</h3>
         <form className = 'addForm' onSubmit={handleCart}>
-        <input className = 'addToCart' type = 'submit' onChange={handleNewCart}/>
+        <input className = 'addToCart' type = 'submit' value = 'ADD TO CART' onChange={handleNewCart}/>
         </form>
+        </div>
+        </div>
+   
         </>
     )
 }

@@ -91,10 +91,11 @@ const Add = (props:any)=>{
 
         return (
             <>
-            <h2>Add New Planet</h2>
+            {props.username ?
             <button className = "btn" onClick={() => setAddbtn(!addBtn)}>
-            {!addBtn ? "Add planet" : "Cancel"}
+            {!addBtn ? "ADD PLANET" : "Cancel"}
             </button>
+            : null }           
             {addBtn && (
                 <form className = 'addForm' onSubmit={handleSubmit}>
                 <label htmlFor="name"></label>

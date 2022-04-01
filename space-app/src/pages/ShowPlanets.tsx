@@ -51,22 +51,8 @@ const ShowPlanets = (props:any) => {
   }
 
 
-   console.log(props.planet._id)
 
-     const handleDelete = (planetData:any)=>{
-      
-      axios
-      .delete(`https://space-meteor.herokuapp.com/planets/${planetData._id}`)
-        .then(()=>{
-          axios
-          .get('https://space-meteor.herokuapp.com/planets/')
-          .then((response:any)=>{
-            setPlanets(response.data)
-          })
-        })
-     }
-  
-  return (
+    return (
     <div>
       <img src = {props.image} className = 'showPlanet' onClick={handleOpen}>
       </img>
@@ -78,20 +64,18 @@ const ShowPlanets = (props:any) => {
         BackdropComponent={Backdrop}
       >
         <Box sx = {style} className = 'showModal'>
-        <img className = 'showImage'src = {props.image}></img>
-        <div key={props._id}>
+        <div className= 'showImageDiv'><img className = 'showImage'src = {props.image}></img></div>
+        <div className = 'showInfo' key={props._id}>
           {/* <h2>{props.id}</h2> */}
-          <h2>{props.name}</h2>
-          <h3>{props.description}</h3>
-          <h3>Ticket Price: {props.ticket_price}</h3>
-          <h3>Year Discovered: {props.date_found}</h3>
-          <h3>Featured Activity: {props.activity}</h3>
-          <h3>Weather: {props.weather}</h3>
-          <h3>Distance from Sun: {props.distance} miles</h3>
-          <h3>Day Length: {props.day_length} hours</h3>
+          <h2 className = 'showName'>{props.name}</h2>
+          <h3 className = 'showDescription'>{props.description}</h3>
+          <h3>Ticket Price: <span>${props.ticket_price}</span></h3>
+          <h3>Year Discovered: <span>{props.date_found}</span></h3>
+          <h3>Featured Activity: <span>{props.activity}</span></h3>
+          <h3>Weather: <span>{props.weather}</span></h3>
+          <h3>Distance from Sun: <span>{props.distance} miles</span></h3>
+          <h3>Day Length: <span>{props.day_length} hours</span></h3>
          </div>
-         <button onClick = {(event) => {handleDelete(props.planet)}} >delete</button>
-
         </Box>
       </StyledModal>
     </div>

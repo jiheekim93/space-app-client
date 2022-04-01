@@ -4,6 +4,7 @@ import axios from 'axios'
 import '../App.css';
 import AddTickets from './AddTicket'
 import {Link, Routes, Route, useNavigate,} from "react-router-dom";
+import Nav from './Nav'
 
 
 const Tickets = () => {
@@ -71,6 +72,7 @@ const Tickets = () => {
 
     return (
         <>
+        <Nav />
         <div className='ticketsCon'>
         <img className='ticketBackground' src=''/>
         <div className='addTickets'>

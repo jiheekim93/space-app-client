@@ -4,6 +4,8 @@ import axios from 'axios'
 import '../App.css';
 import {Link, Routes, Route, useNavigate,} from "react-router-dom";
 import Tickets from './Tickets'
+import Nav from './Nav'
+
 const Cart:React.FC = (props:any) => {
     const [cartItems, setCartItems] = useState<any['']>([])
     const getCartItems = () => {
@@ -35,6 +37,7 @@ const Cart:React.FC = (props:any) => {
 
     return (
         <>
+        <Nav />
         <h1>CART</h1>
       <div className = 'cartContainer'>
       {cartItems?.map((cart:any)=>{ 

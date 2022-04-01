@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {useState, useEffect} from 'react';
+import Nav from './Nav'
 
 const Login = (props:any) => {
  
@@ -7,7 +8,8 @@ const Login = (props:any) => {
 
     
     return (
-        <div>
+        <>
+            <Nav />
          {/* <button className = 'loginButton' type="button" onClick={handleOpen}>
        Account</button> */}
 
@@ -65,7 +67,7 @@ const Login = (props:any) => {
 
         </div>
         </div>
-        </div>
+        </>
 )
 }
 

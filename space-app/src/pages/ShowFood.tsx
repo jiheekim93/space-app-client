@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Route, Routes, Link} from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-
+import Nav from './Nav'
 const ShowFood = (props:any, fod:any) => {
     const params = useParams()
     const [food, setFood] = useState<any['']>([])
@@ -55,7 +55,12 @@ const ShowFood = (props:any, fod:any) => {
       
     return (
         <>
-        <h3>shop!</h3>
+      <Nav />
+
+      <nav className="shopNavBar">
+            <Link to = '/food'>FOOD</Link>
+            <Link to = '/gear'>GEAR</Link>
+        </nav>
         <img src = {food.image}></img>
         <h1>{food.name}</h1>
         <h2>{food.description}</h2>

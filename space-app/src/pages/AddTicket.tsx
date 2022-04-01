@@ -43,7 +43,7 @@ const AddTickets = (props:any)=>{
 
     return (
      <div className='ticketForm'>
-   
+      <img className="dd"src='https://i.imgur.com/YmFyPYx.png'></img>
       <form onSubmit={handleCart} >
 
         <label htmlFor="date"></label>

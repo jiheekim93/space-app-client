@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
+
 * {
-  /* border: 1px blue solid; */
+  
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* border: 1px solid palegoldenrod */
+  
 }
 
 body {
@@ -11,6 +13,8 @@ body {
   color: white;
   height: 100%;
   margin: 0;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-weight: 200;
 }
 
 a {
@@ -29,13 +33,13 @@ img {
 }
 
 
-
-.planetContainer, .gearContainer, .foodContainer {
+ .gearContainer, .foodContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   gap: 3vw;
+ 
 }
 
 .planetCard, .gearCard, .foodCard {
@@ -107,13 +111,39 @@ video, .rings {
 
 .showModal {
   /* background: black; */
-  width: 400px;
+  width: 500px;
   padding: 50px;
   border-radius: 5%;
+  
+}
+.showInfo h2{
+text-align: center;
+margin-bottom: 10px;
+font-weight: 400;
+font-size: 26px;
+}
 
+.showInfo h3{
+  font-weight: 300;
+}
+
+.showImageDiv {
+  text-align: center;
+}
+
+span {
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
+
+
+.showDescription {
+  margin-bottom: 10px;
 }
 
 .showPlanet {
+  margin-top: 25vh;
   transition-duration: 0.4s;
 }
 
@@ -122,30 +152,218 @@ video, .rings {
   transform: scale(1.05);
 }
 
-.Krypton {
-
+/* planet order */
+.Breakup img{
+  width: 50%;
+  margin-top: 30vh;
 }
 
-.Iris-Cream {
-
+.Breakup, .Sauna, .GOP, .Krypton, .Flags, .Z, .Iris-Cream {
+  text-align: center;
+  
 }
 
-.Sauna {
-
+.Sauna img{
+  width: 70%;
+  margin-top: 30vh;
 }
 
-.Breakup {
-
-}
-
-.Flags {
-
+.GOP img{
+  width: 50%
+  
 }
 
 .GOP {
+  /* padding-top: 20px; */
+}
+
+.Krypton img{
+  width: 70%;
+  /* margin-bottom: 7px; */
+}
+
+.Flags img {
+  width: 80%;
+  margin-top: 30vh;
+}
+
+
+.Z img{
+  width: 70%;
+  margin-top: 30vh;
+}
+
+.Iris-Cream img{
+  width: 80%;
+}
+
+
+
+
+.shopNav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15vw;
+  margin-top: 300px;
+}
+
+.sunImage{
+  width: 330px;
+  /* position: relative; */
+  /* top: 20vh; */
+  margin-left: -130px;
+}
+
+.planetContainer {
+  display: flex;
+  /* margin-left: 30vw; */
+  flex-direction: row;
+  justify-content: flex-start;
+  /* margin-right: 5vw; */
+  /* gap: 3vw; */
+  margin-top: 6vh;
+  /* margin-left: 20vw; */
+}
+
+.planetContainer img {
+  align-self: center;
+}
+
+.logo {
+  width: 125px;
+  margin-left: 30px;
+  margin-top: 25px;
+}
+
+.logoHeader {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.logoName {
+  align-self: center;
+  font-size: 4em;
+  margin-top: 15px;
+}
+
+.missionDiv {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 15vh;
+}
+
+.missionText{
+  width: 600px;
+  font-size: 3.5em;
+  align-self: center;
+}
+
+.planetsButton {
+  padding: 10px 20px;
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+  margin-top: 30px;
+  transition-duration: 0.4s;
+}
+
+.planetsButton:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.NavBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.navBarSmall{
+  display: flex;
+  flex-direction: row;
+
+  gap: 5vw;
+  margin-left: 3vw;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+.account {
+  align-self: center;
+  margin-right: 30px;
+  border: 1px solid white;
+  padding: 7px 15px;
+  margin-left: 20px;
+}
+
+
+.link {
+  font-weight: 300;
+  font-size: 18px;
+  transition-duration: 0.4s;
+}
+
+.link:hover {
+  transform: scale(1.05);
+}
+
+.btn {
+ 
+  border: 1px solid white;
+  padding: 7px 15px;
+  background: transparent;
+  color: white;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  font-weight: 300;
+  
+}
+
+.planetHeader {
+  font-weight: 200;
+  text-align: center;
+  margin-top: 5vh;
+  font-size: 2.5em;
+}
+
+.shopNavBar {
+  display: flex;
+  flex-direction: row;
+  gap: 10vw;
+  justify-content: center;
+  margin-top: 2vh;
+  margin-bottom: 5vh;
+}
+
+.shopHeader {
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 5vh;
+}
+
+.foodName, .foodPrice {
+  font-weight: 300;
 
 }
 
-.Z {
+.foodName {
+  text-align: center;
+}
 
+.showStuff {
+  width: 600px;
+  text-align: center;
+  
+}
+
+.showStuffDiv {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

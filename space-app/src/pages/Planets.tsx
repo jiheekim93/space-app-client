@@ -5,7 +5,7 @@ import Edit from './EditPlanet';
 import axios from 'axios'
 import {Route, Routes, Link} from 'react-router-dom'
 import ShowPlanets from "./ShowPlanets"
-
+import Nav from './Nav'
 const Planets:React.FC  = (props:any) => {
     const [planets, setPlanets] = useState<[]>([])
     // const [newPlanet, setNewPlanet] = useState<[]>([])
@@ -110,37 +110,61 @@ const Planets:React.FC  = (props:any) => {
           //           })
           //       })
           //   }
-
+          const handleDelete = (planetData:any)=>{
+      
+            axios
+            .delete(`https://space-meteor.herokuapp.com/planets/${planetData._id}`)
+              .then(()=>{
+                axios
+                .get('https://space-meteor.herokuapp.com/planets/')
+                .then((response:any)=>{
+                  setPlanets(response.data)
+                })
+              })
+           }
+      
           useEffect(() => {
             getPlanets()
            }, [])
   
     return (
       <>
+          <Nav />
             <Add handleCreate={handleCreate} />
-
       <div className='showcase'>
     <video src="https://i.imgur.com/cUgXEi6.mp4" loop muted autoPlay={true}></video>
-    <img className = 'rings' src = 'https://i.imgur.com/DIV0fC4.png'></img>
+    {/* <img className = 'rings' src = 'https://i.imgur.com/DIV0fC4.png'></img> */}
     </div>
-      <h1>TRAVEL TO THE PLANETS!</h1>
+      <h1 className = 'planetHeader'>UPCOMING LAUNCHES</h1>
       <div className = 'planetContainer'>
+      <img className = 'sunImage' src = 'https://i.imgur.com/lWUkGyz.png?1'></img>
       {planets?.map((planet:any)=>{ 
         return (
         <div className = {planet.name} key = {planet._id}>
-        <ShowPlanets planet={planet} planets = {planets} id = {planet._id}
+        <ShowPlanets planet = {planet} planets = {planets} id = {planet._id}
         name = {planet.name}
         image = {planet.image}
         description = {planet.description}
-        price = {planet.price}
+        ticket_price = {planet.ticket_price}
         date_found = {planet.date_found}
         activity = {planet.activity} weather = {planet.weather} distance = {planet.distance} day_length= {planet.day_length}/>
+        {props.username ?
         <Edit handleUpdate={handleUpdate} id={planet._id}/>
+        : null }
+
+        {props.username ?
+        <button onClick = {(event) => {handleDelete(planet)}} >delete</button>
+        : null }
         </div>
          )
       })
     }
+         
+
     </div>
+   
+    {/* <div className='sunContainer'>
+    </div> */}
       </>
     )
 }
