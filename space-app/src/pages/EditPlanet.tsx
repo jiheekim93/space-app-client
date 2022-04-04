@@ -76,7 +76,7 @@ return (
 
     <>
     <button className = "btn" onClick={() => setEditBtn(!editBtn)}>
-            {!editBtn ? "Edit planet" : "Cancel"}
+            {!editBtn ? "EDIT PLANET" : "CANCEL"}
             </button>
             {editBtn && (
         <form onSubmit={handleSubmit}>

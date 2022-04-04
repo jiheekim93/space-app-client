@@ -3,6 +3,14 @@ import { styled, Box } from '@mui/material';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import {useState} from 'react'
 import axios from 'axios'
+import { Component } from 'react';
+import ReactDOM from 'react-dom';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import {
+  Link,
+} from "react-router-dom";
+
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
   z-index: 1300;
@@ -52,6 +60,7 @@ const ShowPlanets = (props:any) => {
 
 
 
+
     return (
     <div>
       <img src = {props.image} className = 'showPlanet' onClick={handleOpen}>
@@ -64,17 +73,56 @@ const ShowPlanets = (props:any) => {
         BackdropComponent={Backdrop}
       >
         <Box sx = {style} className = 'showModal'>
-        <div className= 'showImageDiv'><img className = 'showImage'src = {props.image}></img></div>
+        <div className = 'carouselName'>
+        <Carousel className = 'carousel' showArrows={true} autoPlay = {true} infiniteLoop = {true} showStatus = {false} useKeyboardArrows = {true} showIndicators = {false} showThumbs = {false} width = {'500px'} dynamicHeight = {false}>
+
+                <div>
+                    <img className = 'carouselImage' src={props.img1} />
+
+                </div>
+                <div>
+                    <img className = 'carouselImage' src={props.img2} />
+
+                </div>
+                <div>
+                    <img className = 'carouselImage' src={props.img3} />
+
+                </div>
+            </Carousel>
+
         <div className = 'showInfo' key={props._id}>
           {/* <h2>{props.id}</h2> */}
-          <h2 className = 'showName'>{props.name}</h2>
+          <h1 className = 'showName'>{props.name.toUpperCase()}</h1>
           <h3 className = 'showDescription'>{props.description}</h3>
-          <h3>Ticket Price: <span>${props.ticket_price}</span></h3>
-          <h3>Year Discovered: <span>{props.date_found}</span></h3>
-          <h3>Featured Activity: <span>{props.activity}</span></h3>
-          <h3>Weather: <span>{props.weather}</span></h3>
-          <h3>Distance from Sun: <span>{props.distance} miles</span></h3>
-          <h3>Day Length: <span>{props.day_length} hours</span></h3>
+          <h3 className = 'ticketPrice'>TICKET PRICE: <span>${props.ticket_price}</span></h3>
+
+
+         </div>
+         </div>
+         <div className = 'showShit'>
+         <div className = 'showShitText'>
+         <div>
+         <h3 className = 'stuff'>YEAR DISCOVERED: <br/><span>{props.date_found}</span></h3>
+         <h3 className = 'stuff'>FEATURED ACTIVITY: <br/><span>{props.activity}</span></h3>
+         </div>
+         <div>
+         <h3 className = 'stuff'>DISTANCE FROM SUN: <br/><span>{props.distance} miles</span></h3>
+         <h3 className = 'stuff'>DAY LENGTH: <br/><span>{props.day_length} hours</span></h3>
+         </div>
+
+         </div>
+         <div className = 'lastRow'>
+         <h3 className = 'weather'>WEATHER: <br/><span>{props.weather}</span></h3>
+         <Link to ='/tickets'>
+   <button className = 'buyTicketButton'>BUY TICKETS</button>
+</Link>
+</div>
+         <div className = 'dividerButton'>
+
+
+
+         </div>
+
          </div>
         </Box>
       </StyledModal>

@@ -5,11 +5,13 @@ import '../App.css';
 import {Link, Routes, Route, Router, useNavigate } from 'react-router-dom'
 import ShowGears from './ShowGears'
 import Nav from './Nav'
+import Footer from './Footer'
 
 const GearPage: React.FC = (props:any) => {
     const [gears, setGears] = useState<[]>([])
+    const [filter, setFilter] = useState('')
     let navigate = useNavigate()
-    
+
 
     const getGears = () => {
         axios
@@ -26,36 +28,56 @@ const GearPage: React.FC = (props:any) => {
        }, [])
 
     return (
-        
+
         <>
         <Nav/>
-        <nav className="shopNavBar">
-            <Link to = '/food'>FOOD</Link>
-            <Link to = '/gear'>GEAR</Link>
-        </nav>
+        <img className = 'wallpaper' src = 'https://i.imgur.com/ywwncu9.jpg'></img>
 
-        <h1 className = 'shopHeader'>BROWSE SPACE GEAR</h1>
+
+        <h1 className = 'shopHeader'>FEATURED PRODUCTS</h1>
+        <div className = 'searchDiv'>
+          
+        <input className = 'searchInput' type="text" placeholder="SEARCH..." value={filter} onChange={(e) => {e.preventDefault(); setFilter(e.target.value);
+          }}
+          ></input>
+          </div>
+
 
           <div className = 'gearContainer'>
-            {gears?.map((gear:any, index)=>{ 
+          <div className="shopNavBar">
+              <Link className = 'shopLink' to = '/food'>FOOD</Link>
+              <div>
+              <Link className = 'shopLink' to = '/gear'>GEAR</Link>
+              <div className = 'line'></div>
+              </div>
+              </div>
+            {gears?.filter((search:any) =>
+                search.name.toLowerCase().includes(filter.toLowerCase())).map((gear:any, index)=>{
             return (
                 <>
+             
+
                 <div>
                   <Routes>
                     <Route path = '/gear/:id' element = {<ShowGears gear = {gear} gears = {gears}/>}/>
                   </Routes>
                 </div>
+
             <div className = 'gearCard' key = {gear._id} >
-            <img onClick = {() => {navigate('/gear/' + gear._id)} } src = {gear.image}></img>
+              
+            <div onClick = {() => {navigate('/gear/' + gear._id)} } className = 'offBlack'>
+            <img  src = {gear.image}></img>
+            </div>
             <h3 className = 'foodName'>{gear.name}</h3>
-            
-            <h4 className = 'foodPrice'>${gear.price}</h4>
+
+            <h4 className = 'foodPrice'>${gear.price_string}</h4>
             </div>
             </>
             )
             })
         }
         </div>
+        <Footer />
         </>
     )
 }

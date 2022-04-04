@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const Add = (props:any)=>{
     let emptyPlanet = { name: '', image: '', description: '', ticket_price: '', date_fround:'', activity:'', weather:'',distance:'', day_length:'' }
-    const [planet, setPlanet] = useState<any['']>({emptyPlanet})   
+    const [planet, setPlanet] = useState<any['']>({emptyPlanet})
     const [addBtn, setAddbtn] = useState<any['']>('')
     // const [newPlanet, setNewPlanet] = useState<[]>([])
     // const [newName, setNewName] = useState<string>('')
@@ -83,7 +83,7 @@ const Add = (props:any)=>{
         setPlanet({ ...planet, [event.target.name]: event.target.value })
       }
 
-  
+
     const handleSubmit = (event:any) => {
         event.preventDefault()
         props.handleCreate(planet)
@@ -95,7 +95,7 @@ const Add = (props:any)=>{
             <button className = "btn" onClick={() => setAddbtn(!addBtn)}>
             {!addBtn ? "ADD PLANET" : "Cancel"}
             </button>
-            : null }           
+            : null }
             {addBtn && (
                 <form className = 'addForm' onSubmit={handleSubmit}>
                 <label htmlFor="name"></label>

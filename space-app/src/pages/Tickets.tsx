@@ -46,10 +46,10 @@ const Tickets = () => {
             })
           })
        }
-         
-    
+
+
        const handleCart = () => {
-      
+
         axios.post(
           'https://space-meteor.herokuapp.com/cart',
           {
@@ -73,6 +73,8 @@ const Tickets = () => {
     return (
         <>
         <Nav />
+        <img className = 'wallpaper' src = 'https://i.imgur.com/ywwncu9.jpg'></img>
+        <h1 className = 'planetHeader'>BUY LAUNCH TICKETS</h1>
         <div className='ticketsCon'>
         <img className='ticketBackground' src=''/>
         <div className='addTickets'>
@@ -92,7 +94,7 @@ const Tickets = () => {
                 </div>
             )}
              )}
-       
+
         </div>
         </div>
         </>

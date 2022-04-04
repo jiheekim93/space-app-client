@@ -88,7 +88,7 @@ const Planets:React.FC  = (props:any) => {
               })
           }
           // console.log(planets)
-  
+
           // const handleSubmit = () => {
           //   axios.post(
           //       'https://space-meteor.herokuapp.com/planets',
@@ -111,7 +111,7 @@ const Planets:React.FC  = (props:any) => {
           //       })
           //   }
           const handleDelete = (planetData:any)=>{
-      
+
             axios
             .delete(`https://space-meteor.herokuapp.com/planets/${planetData._id}`)
               .then(()=>{
@@ -122,11 +122,13 @@ const Planets:React.FC  = (props:any) => {
                 })
               })
            }
-      
+
           useEffect(() => {
             getPlanets()
            }, [])
-  
+
+        console.log(props.username)
+
     return (
       <>
           <Nav />
@@ -138,7 +140,7 @@ const Planets:React.FC  = (props:any) => {
       <h1 className = 'planetHeader'>UPCOMING LAUNCHES</h1>
       <div className = 'planetContainer'>
       <img className = 'sunImage' src = 'https://i.imgur.com/lWUkGyz.png?1'></img>
-      {planets?.map((planet:any)=>{ 
+      {planets?.map((planet:any)=>{
         return (
         <div className = {planet.name} key = {planet._id}>
         <ShowPlanets planet = {planet} planets = {planets} id = {planet._id}
@@ -147,22 +149,32 @@ const Planets:React.FC  = (props:any) => {
         description = {planet.description}
         ticket_price = {planet.ticket_price}
         date_found = {planet.date_found}
-        activity = {planet.activity} weather = {planet.weather} distance = {planet.distance} day_length= {planet.day_length}/>
-        {props.username ?
+        activity = {planet.activity} weather = {planet.weather} distance = {planet.distance} day_length= {planet.day_length} img1 = {planet.img1} img2 = {planet.img2} img3 = {planet.img3}/>
+
+
+        {props.username === 'lily' ?
         <Edit handleUpdate={handleUpdate} id={planet._id}/>
         : null }
 
-        {props.username ?
-        <button onClick = {(event) => {handleDelete(planet)}} >delete</button>
+        {props.username === 'jihee123' ?
+        <Edit handleUpdate={handleUpdate} id={planet._id}/>
+        : null }
+
+        {props.username  === 'lily' ?
+        <button className = 'deleteButton' onClick = {(event) => {handleDelete(planet)}} >USE DEATH STAR</button>
+        : null }
+        
+         {props.username  === 'jihee123' ?
+        <button className = 'deleteButton' onClick = {(event) => {handleDelete(planet)}} >USE DEATH STAR</button>
         : null }
         </div>
          )
       })
     }
-         
+
 
     </div>
-   
+
     {/* <div className='sunContainer'>
     </div> */}
       </>

@@ -31,7 +31,8 @@ const AddTickets = (props:any)=>{
             id: ticket._id,
             destination: ticket.destination,
             date: ticket.date,
-            price: ticket.price
+            price: ticket.price,
+            price_string: ticket.price_string
           }).then(() => {
             axios.get('https://space-meteor.herokuapp.com/cart')
             .then((response) => {
@@ -42,10 +43,21 @@ const AddTickets = (props:any)=>{
 
 
     return (
-     <div className='ticketForm'>
-      <img className="dd"src='https://i.imgur.com/YmFyPYx.png'></img>
-      <form onSubmit={handleCart} >
+      <>       
+      {/* <div className="ticket">  <img src='https://i.imgur.com/YmFyPYx.png'></img></div>    */}
+   
 
+      
+      <div className='ticketForm'>
+
+      <form onSubmit={handleCart}>
+        
+        <div className='ticketLogo'>
+      <img src="https://i.imgur.com/19IQ4Ai.png?1"></img>
+      <h3>Mission Atom -- *** - *** - **** --</h3>
+
+      </div>
+      <div className='ticketInput'>
         <label htmlFor="date"></label>
         <input type="date" 
         name="date" 
@@ -54,7 +66,7 @@ const AddTickets = (props:any)=>{
 
         <label htmlFor="destination"> 
         <select name="destination"onChange={handleChange}>
-        <option value='Your Destinations'>Destinations</option>
+        <option value='Your Destinations'>--DESTINATIONS--</option>
         <option value='Krypton'>Krypton</option>
         <option value='Iris-Cream'>Iris-Cream</option>
         <option value='Sauna XXA'>Sauna XXA</option>
@@ -64,20 +76,24 @@ const AddTickets = (props:any)=>{
         <option value='Pop-star Z'>Pop-star Z</option>
         </select></label>
 
-        <label htmlFor="price"></label>
+        {/* <label htmlFor="price"></label>
         <input type="text" name="price"  placeholder='price'
         value={ticket.price}
-        onChange={handleChange}/>
+        onChange={handleChange}/> */}
 
 
         {/* <input type="text" name="destination" 
         value={ticket.destination}
         onChange={handleChange}/> */}
-
-       <button> <input type="submit" onChange={handleNewCart}/></button>
+      <div className='submitBtn'>
+       <input type="submit" value = 'BUY' onChange={handleNewCart}/>
+       </div>
+       </div>
       </form>
  
     </div>
+
+    </>
         )
 
     }

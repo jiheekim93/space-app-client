@@ -5,16 +5,23 @@ import Food from './Food';
 import axios from 'axios'
 import {Route, Routes, Link} from 'react-router-dom'
 import Nav from './Nav'
+import Footer from './Footer'
 const Shop = () => {
     return (
         <>
         <Nav />
-        <div className='shopNav'> 
-        <Link to = '/gear'><img src = 'https://i.imgur.com/uwvs2lz.png'></img>GEAR</Link>
-
-         <Link to = '/food'><img src = 'https://i.imgur.com/jerWGsZ.png'></img></Link>
+        <img className = 'wallpaper' src = 'https://i.imgur.com/ywwncu9.jpg'></img>
+        <div className='shopNav'>
+        <div className = 'shopImage'>
+        <Link to = '/gear'><img  src = 'https://i.imgur.com/uwvs2lz.png'></img></Link>
+        <div className = 'shopGear'>BROWSE GEAR</div>
         </div>
-       
+        <div className = 'shopImage'>
+         <Link to = '/food'><img  src = 'https://i.imgur.com/jerWGsZ.png'></img></Link>
+         <div className = 'shopFood'>BROWSE FOOD</div>
+         </div>
+        </div>
+        <Footer />
         </>
     )
 }
